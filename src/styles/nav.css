@@ -1,0 +1,51 @@
+.hamburger-menu {
+  position: relative;
+}
+
+.menu-icon {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.bar {
+  width: 30px;
+  height: 3px;
+  background-color: #333;
+  margin: 4px 0;
+  transition: transform 0.3s ease;
+}
+
+.open .bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.open .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.open .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+.menu-items {
+  list-style: none;
+  padding: 0;
+  position: absolute;
+  top: 40px; /* Adjust the positioning as needed */
+  right: 0;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+}
+
+.menu-items li {
+  padding: 2px;
+  border-bottom: 1px solid #ddd;
+  text-align: right;
+}
+
+/* Add more styling as per your design */

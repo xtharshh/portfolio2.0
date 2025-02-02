@@ -1,0 +1,107 @@
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  opacity: 0;
+  animation: fadeIn 1s ease-out forwards;
+}
+
+.animate-slide-up {
+  opacity: 0;
+  animation: slideUp 0.8s ease-out forwards;
+}
+
+.zoom {
+  transition: all 0.3s ease-in-out;
+  will-change: transform;
+}
+
+.zoom:hover {
+  transform: scale(1.02);
+}
+
+/* Background styles that don't affect content visibility */
+.intro {
+  position: relative;
+}
+
+.intro::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom right, 
+    rgba(26, 22, 37, 0.95), 
+    rgba(26, 22, 37, 0.98)
+  );
+  z-index: -1;
+}
+
+/* Box hover effect with better visibility */
+.box {
+  position: relative;
+  background: var(--background);
+  transition: all 0.3s ease-in-out;
+}
+
+.box:hover {
+  box-shadow: 0 0 25px rgba(124, 58, 237, 0.15);
+}
+
+/* Ensure content is always visible */
+.box > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Add these utility classes */
+.text-visible {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.content-wrapper {
+  position: relative;
+  z-index: 2;
+}
+
+/* Fix for dark mode */
+:root[data-theme="dark"] .intro::before {
+  background: linear-gradient(
+    to bottom right, 
+    rgba(26, 22, 37, 0.98), 
+    rgba(26, 22, 37, 1)
+  );
+}
+
+/* Ensure proper text contrast */
+.dark .box {
+  color: var(--foreground);
+}
+
+/* Fix for animation completion */
+.animation-complete {
+  opacity: 1;
+  transform: translateY(0);
+}
+

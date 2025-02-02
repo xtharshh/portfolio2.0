@@ -1,0 +1,45 @@
+/* global.css */
+
+.footer {
+
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .button-group button {
+    margin: 10px;
+  }
+  
+  .copyright {
+    font-size: 0.8rem;
+    color: #666;
+  }
+  
+  /* Media queries */
+  
+  @media (max-width: 768px) {
+   .button-group {
+      flex-direction: column;
+    }
+   .button-group button {
+      margin: 10px 0;
+    }
+  }
+  
+  @media (max-width: 480px) {
+   .footer {
+      padding: 10px;
+    }
+   .button-group {
+      margin-bottom: 10px;
+    }
+   .copyright {
+      font-size: 0.6rem;
+    }
+  }
