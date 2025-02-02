@@ -2,10 +2,9 @@
 
 import { motion } from "framer-motion"
 import {
-    SiInfosys,       // Infosys
-       // NPTEL (Assuming an icon is available)
-    SiAmazon,     // AWS
-    SiUdemy,         // Udemy
+    SiInfosys,       
+    SiAmazon,     
+    SiUdemy,        
   } from 'react-icons/si';
   
   
