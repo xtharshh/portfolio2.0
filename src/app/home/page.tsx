@@ -144,7 +144,7 @@ export default function Hero() {
                      transform hover:scale-105 hover:shadow-lg
                      flex items-center justify-center gap-2
                      w-auto"
-          onClick={() => window.open("/resume.pdf", "_blank")}
+          onClick={() => window.open("https://drive.google.com/file/d/1Fq7Wopur_u7jslOJT__g-bCHl5RwCjlu/view?usp=drive_link", "_blank")}
         >
           <span>Resume</span>
           <svg
