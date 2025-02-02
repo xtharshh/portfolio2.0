@@ -15,6 +15,7 @@
 }
 
 body {
+  overflow-x: hidden;
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
@@ -22,6 +23,7 @@ body {
 /* Global styles for light and dark themes */
 html {
   transition: background-color 0.3s ease, color 0.3s ease;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -218,7 +220,7 @@ body {
     filter: drop-shadow(0 0 8px rgba(255, 77, 141, 0.3));
   }
 }
-@keyframes fade-in {
+@keyframes fadeIn {
   from {
     opacity: 0;
   }
@@ -227,7 +229,7 @@ body {
   }
 }
 
-@keyframes slide-up {
+@keyframes slideUp {
   from {
     opacity: 0;
     transform: translateY(20px);
@@ -239,12 +241,11 @@ body {
 }
 
 .animate-fade-in {
-  animation: fade-in 1s ease-out forwards;
+  animation: fadeIn 1s ease-out forwards;
 }
 
 .animate-slide-up {
-  opacity: 0;
-  animation: slide-up 1s ease-out forwards;
+  animation: slideUp 1s ease-out forwards;
 }
 
 /* Prevent FOUC (Flash of Unstyled Content) */
@@ -270,6 +271,8 @@ svg {
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 /* Add custom animation for email icon */
@@ -280,5 +283,33 @@ svg {
 
 .email-bounce {
   animation: gentle-bounce 2s ease-in-out infinite;
+}
+
+/* Optimize animations */
+* {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Prevent horizontal scroll during animations */
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
+/* Ensure proper stacking */
+.relative {
+  position: relative;
+}
+
+/* Improve animation performance */
+.transform-gpu {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Add vertical text support */
+.writing-mode-vertical {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
 }
 

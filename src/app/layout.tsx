@@ -1,5 +1,5 @@
 import "./globals.css"
-import { Inter, Space_Grotesk, Orbitron } from "next/font/google"
+import { Inter,  } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import type React from "react"
 import { Providers } from "./providers"
@@ -12,15 +12,6 @@ const inter = Inter({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 })
 
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
-  display: 'swap',
-})
-
-const orbitron = Orbitron({
-  subsets: ['latin'],
-  display: 'swap',
-})
 
 export const metadata = {
   title: "Harsh Kumar Portfolio",

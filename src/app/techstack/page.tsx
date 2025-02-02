@@ -148,7 +148,7 @@ const androidSkills = [
 
 export default function TechStack() {
   return (
-    <div className="w-full min-h-screen bg-gradient-to-b from-white to-gray-100 dark:from-[#1A1625] dark:to-[#1A1625] py-20">
+    <div className="w-full min-h-screen bg-gradient-to-b from-white  dark:from-[#1A1625] dark:to-[#1A1625] py-20">
       <div className="tech-stack-container max-w-7xl mx-auto px-4">
         <span className="block text-2xl text-gray-600 dark:text-gray-400 text-center font-mono font-bold mb-8 animate-fade-in">
           Explore

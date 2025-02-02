@@ -1,68 +1,159 @@
 "use client"
 
-import { useState } from "react"
-import { Project } from "../../components/ui/project"
-import { BackgroundAnimation } from "../../components/background-animation"
-import { CustomScrollBar } from "../../components/custom-scroll-bar"
+import { motion, useScroll, useTransform } from "framer-motion"
+import { useRef } from "react"
+import { Github, ExternalLink } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import Image from "next/image"
 
-const projects = [
+
+interface Project {
+  title: string;
+  description: string;
+  imageUrl: string;
+  liveUrl?: string;
+  githubUrl?: string;
+  sampleImages?: string[];
+  technologies: string[];
+}
+
+const projects: Project[] = [
   {
-    title: "Project 1",
-    subtitle: "Innovation Redefined",
+    title: "ADVO-KIDS",
     description:
-      "This innovative solution revolutionizes how we approach problem-solving in the digital age. Our team has developed cutting-edge technology that streamlines processes, enhances user experiences, and sets new industry standards. By leveraging advanced algorithms and intuitive design, Project 1 offers unparalleled efficiency and functionality.",
-    image: "/placeholder.svg?height=1080&width=1920",
-    link: "#",
+      "ADVO-KIDS is a gamified platform designed to educate children about legal laws. Through interactive games and engaging content, it empowers kids to learn about their rights and responsibilities in a fun and accessible way.",
+    imageUrl: "https://res.cloudinary.com/djcbdfehg/image/upload/v1738519166/advokids.png", // Ensure 'advokids' is properly imported or replace with a string URL
+    liveUrl: "https://advo-kids.vercel.app",
+    sampleImages: ["/placeholder.svg", "/placeholder.svg"],
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
   },
   {
-    title: "Project 2",
-    subtitle: "User-Centric Design",
+    title: "KWICK",
     description:
-      "Project 2 showcases our commitment to user-centric design and cutting-edge technology integration. We've created an immersive platform that adapts to individual user needs, providing personalized experiences at scale. With a focus on accessibility and intuitive navigation, this project sets a new benchmark for user engagement and satisfaction.",
-    image: "/placeholder.svg?height=1080&width=1920",
-    link: "#",
+      "KWICK is a React Native platform designed to connect maids and customers seamlessly. It provides an intuitive interface for customers to find and book reliable maid services, and for maids to offer their services, manage schedules, and communicate with clients.",
+    imageUrl: "https://res.cloudinary.com/djcbdfehg/image/upload/v1711614254/samples/people/kitchen-bar.jpg",
+    liveUrl: "https://xtmaids.vercel.com",
+    sampleImages: ["/placeholder.svg", "/placeholder.svg"],
+    technologies: ["React Native", "Expo/Cli", "Firebase", "TypeScript"],
   },
   {
-    title: "Project 3",
-    subtitle: "Pushing Boundaries",
+    title: "Koolnotes",
     description:
-      "With Project 3, we've pushed the boundaries of what's possible, creating a seamless experience for our users. This groundbreaking initiative combines advanced AI capabilities with robust data analytics, offering insights and functionalities previously thought unattainable. The result is a powerful tool that transforms how businesses operate and make decisions.",
-    image: "/placeholder.svg?height=1080&width=1920",
-    link: "#",
+      "Koolnotes is an interactive note-taking website developed using Next.js and MongoDB. It offers a seamless platform for users to create, edit, and organize their notes efficiently. With features like real-time collaboration, rich text formatting, and secure cloud storage, Koolnotes transforms the way you manage information and boosts your productivity.",
+    imageUrl: "https://res.cloudinary.com/djcbdfehg/image/upload/v1735581531/koolnotes.png",
+    liveUrl: "https://koolnotes.vercel.app/",
+    sampleImages: ["/images/koolnotes1.png", "/images/koolnotes2.png"],
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
   },
   {
-    title: "Project 4",
-    subtitle: "Expertise Culmination",
+    title: "Secrets Project",
     description:
-      "Project 4 represents the culmination of our team's expertise, delivering unparalleled value to our clients. This comprehensive solution integrates multiple technologies to create a unified ecosystem that enhances productivity, fosters collaboration, and drives innovation. It's a testament to our commitment to excellence and our ability to solve complex challenges.",
-    image: "/placeholder.svg?height=1080&width=1920",
-    link: "#",
+      "The Secrets Project is a web application built with EJS templates, Google OAuth for authentication, MongoDB for data storage, and JSON Web Tokens (JWT) for secure session handling. It allows users to anonymously share and store their secrets in a safe environment. Users can register or sign in with their Google accounts, ensuring a seamless and secure login experience.",
+    imageUrl: "https://res.cloudinary.com/djcbdfehg/image/upload/v1711614282/samples/cup-on-a-table.jpg",
+    liveUrl: "https://xtsecrets.vercel.app",
+    sampleImages: ["/images/secrets1.png", "/images/secrets2.png"],
+    technologies: ["EJS", "JavaScript", "CSS"],
   },
-]
+];
 
-export function Projects() {
-  const [currentSlide, setCurrentSlide] = useState(0)
 
-  const handleSlideChange = (index: number) => {
-    setCurrentSlide(index)
-  }
-
+export default function Projects() {
   return (
-    <div className="relative h-auto">
-      <BackgroundAnimation />
-      <div className="flex flex-col items-center">
+    <div className="relative py-32">
+      <div className="max-w-7xl mx-auto px-6">
+      <span className="block text-2xl text-gray-600 dark:text-gray-400 text-center font-mono font-bold mb-4 animate-fade-in">
+          Explore
+        </span>
+        
+        <header className="mb-12">
+          <h1 className="title animate-slide-up">My Skills</h1>
+        </header>
         {projects.map((project, index) => (
-          <div key={index} className="w-full h-auto my-8">
-            <Project {...project} imageOnLeft={index % 2 === 0} />
-          </div>
+          <ProjectCard key={index} project={project} index={index} />
         ))}
       </div>
-      <CustomScrollBar
-        totalSlides={projects.length}
-        currentSlide={currentSlide}
-        onScrollbarClick={handleSlideChange}
-      />
     </div>
   )
 }
+function ProjectCard({ project, index }: { project: Project; index: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "center center"],
+  });
 
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
+  const x = useTransform(
+    scrollYProgress,
+    [0, 0.5],
+    [index % 2 === 0 ? 200 : -200, 0]
+  );
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{
+        opacity,
+        x,
+      }}
+      className="mb-16"
+    >
+      <div className="relative max-w-5xl mx-auto">
+        <motion.div className="bg-white/80 dark:bg-zinc-800/80 backdrop-blur-lg rounded-2xl overflow-hidden border border-zinc-200/50 dark:border-zinc-700/50 shadow-xl">
+          <div className="h-96 relative overflow-hidden">
+            <Image
+              src={project.imageUrl || "/placeholder.svg"}
+              alt={project.title}
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="relative p-4 text-gray-700 dark:text-gray-200">
+            <h3 className="text-2xl font-bold mb-4 text-zinc-900 dark:text-zinc-100">
+              {project.title}
+            </h3>
+            <p className="text-zinc-600 dark:text-zinc-400 text-lg mb-4">
+              {project.description}
+            </p>
+            <div className="flex flex-wrap gap-2 mb-4">
+              {project.technologies.map((tech) => (
+                <span
+                  key={tech}
+                  className="px-3 py-1 bg-zinc-100 dark:bg-zinc-700 rounded-full text-sm"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+            <div className="flex gap-4">
+              {project.githubUrl && (
+                <Button variant="outline" asChild>
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Github className="w-4 h-4 mr-2" />
+                    View Code
+                  </a>
+                </Button>
+              )}
+              {project.liveUrl && (
+                <Button asChild>
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <ExternalLink className="w-4 h-4 mr-2" />
+                    Live Demo
+                  </a>
+                </Button>
+              )}
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+}
