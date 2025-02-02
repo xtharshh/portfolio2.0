@@ -80,6 +80,6 @@ export default function Page() {
           <Footer />
 
       </div>
-@    </main>
+    </main>
   );
 }

@@ -140,18 +140,26 @@ export default function Hero() {
       >
         <button
           className="px-6 py-2.5 bg-[#ff4d8d] hover:bg-[#ff3a7d] text-white rounded-full 
-                     text-lg font-semibold transition-all duration-300 
-                     transform hover:scale-105 hover:shadow-lg
-                     flex items-center justify-center gap-2
-                     w-auto"
-          onClick={() => window.open("https://drive.google.com/file/d/1Fq7Wopur_u7jslOJT__g-bCHl5RwCjlu/view?usp=drive_link", "_blank")}
+             text-lg font-semibold transition-all duration-300 
+             transform hover:scale-105 hover:shadow-lg
+             flex items-center justify-center gap-2
+             w-auto"
         >
-          <span>Resume</span>
+          <a
+            href="https://drive.google.com/file/d/1Fq7Wopur_u7jslOJT__g-bCHl5RwCjlu/view?usp=drive_link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Resume
+          </a>
           <svg
             className="w-5 h-5"
             fill="none"
             stroke="currentColor"
+            strokeWidth="2"
             viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
           >
             <path
               strokeLinecap="round"
