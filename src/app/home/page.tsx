@@ -146,7 +146,7 @@ export default function Hero() {
              w-auto"
         >
           <a
-            href="https://drive.google.com/file/d/1Fq7Wopur_u7jslOJT__g-bCHl5RwCjlu/view?usp=drive_link"
+            href="https://drive.google.com/file/d/1PRRSkMF0alt3t7JMCAjKUOFIbM7aXDZk/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
           >
