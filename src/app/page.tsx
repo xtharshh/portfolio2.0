@@ -13,6 +13,7 @@ import KrishnaQuote from "./krishna/page";
 import ScrollSection from "@/components/ScrollSection";
 import  Projects from "./projects/page";
 import Certifications from "./certifications/page";
+import ChatBox from "@/components/ChatBox";
 // import Navbar from "@/components/Navbar";
 
 
@@ -49,7 +50,7 @@ export default function Page() {
     <main className="no-fouc">
       <div className={styles.container}>
         <div id="neon" className={styles.neon}></div>
-        
+        <ChatBox />
         <ScrollSection>
           <Hero />
         </ScrollSection>

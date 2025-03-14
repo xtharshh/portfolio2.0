@@ -100,11 +100,8 @@ export default function Contact() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
             {/* Regular social links */}
             {socialLinks.map((link, index) => (
-              <motion.a
+              <motion.div
                 key={link.id}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 + 0.5 }}
@@ -130,6 +127,8 @@ export default function Contact() {
                       className="!h-10 !w-10 sm:!h-12 sm:!w-12 transition-transform duration-300 group-hover:scale-110"
                       bgColor="transparent"
                       fgColor={`var(--social-icon-color, ${link.lightColor})`}
+                      target="_blank"
+                      rel="noopener noreferrer"
                     />
                   </div>
                   <span className="font-mono text-base sm:text-xl text-gray-800 dark:text-gray-200 
@@ -138,14 +137,11 @@ export default function Contact() {
                     {link.name}
                   </span>
                 </div>
-              </motion.a>
+              </motion.div>
             ))}
 
             {/* Email link */}
-            <motion.a
-              href={emailLink.url}
-              target="_blank"
-              rel="noopener noreferrer"
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.9 }}
@@ -168,6 +164,8 @@ export default function Contact() {
                     className="!h-12 !w-12 sm:!h-16 sm:!w-16 transition-transform duration-300 group-hover:scale-110"
                     bgColor="transparent"
                     fgColor={`var(--social-icon-color, ${emailLink.lightColor})`}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   />
                 </div>
                 <span className="font-mono text-lg sm:text-2xl md:text-3xl text-gray-800 dark:text-gray-200 
@@ -176,7 +174,7 @@ export default function Contact() {
                   {emailLink.name}
                 </span>
               </div>
-            </motion.a>
+            </motion.div>
           </div>
         </motion.div>
       </div>

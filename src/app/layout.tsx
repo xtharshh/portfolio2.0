@@ -1,16 +1,9 @@
 import "./globals.css"
-import { Inter } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import type React from "react"
 import { Providers } from "./providers"
 
 // Load Inter font with all weights and preload it
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-  preload: true,
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-})
 
 export const metadata = {
   title: "Harsh Kumar Portfolio",
@@ -25,6 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         {/* Preconnect and preload fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -34,7 +28,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
       </head>
-      <body className={`${inter.className} antialiased`}>
+      <body className="min-h-screen w-full m-0 p-0">
         <Providers>
           <ThemeProvider
             attribute="class"
