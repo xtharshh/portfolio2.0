@@ -7,34 +7,15 @@ export async function POST(request: Request) {
         const { messages } = await request.json();
         const lastMessage = messages[messages.length - 1].content;
 
-        console.log("Last message from user:", lastMessage); // Log user's last message
-        console.log("Initial message:", initialMessage.content); // Log initial message
-
-        const prompt = `${initialMessage.content}\n\nUser: ${lastMessage}`;
-        console.log("Full prompt sent to Gemini:", prompt); // Log the complete prompt
-
-        const apiKey = process.env.GOOGLE_API_KEY;
-
-        if (!apiKey) {
-            console.error("GOOGLE_API_KEY is not set in environment variables.");
-            return new Response(
-                JSON.stringify({
-                    error: "API key is missing",
-                    details: "GOOGLE_API_KEY environment variable is not set."
-                }),
-                { status: 500, headers: { 'Content-Type': 'application/json' } }
-            );
-        }
-
         const response = await fetch(
-            `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`,
+            `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${process.env.GOOGLE_API_KEY}`,
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     contents: [{
                         parts: [{
-                            text: prompt
+                            text: `${initialMessage.content}\n\nUser: ${lastMessage}`
                         }]
                     }]
                 })
@@ -42,19 +23,10 @@ export async function POST(request: Request) {
         );
 
         if (!response.ok) {
-            const errorBody = await response.text();
-            console.error(`Gemini API Error - Status: ${response.status}, Body: ${errorBody}`);
-            throw new Error(`API request failed: ${response.status} - ${errorBody}`);
+            throw new Error(`API request failed: ${response.status}`);
         }
 
         const data = await response.json();
-        console.log("Gemini API Response:", data); // Log the entire API response
-
-        if (!data.candidates || data.candidates.length === 0 || !data.candidates[0].content || !data.candidates[0].content.parts || data.candidates[0].content.parts.length === 0) {
-            console.error("Gemini API Response Missing Content:", data);
-            throw new Error("Gemini API response is missing expected content.");
-        }
-
         const text = data.candidates[0].content.parts[0].text;
 
         return new Response(
